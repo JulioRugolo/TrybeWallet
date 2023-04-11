@@ -32,7 +32,6 @@ class Login extends React.Component {
     event.preventDefault();
     const { email } = this.state;
     const { dispatch, history } = this.props;
-    console.log(history);
     dispatch(saveEmail(email));
     history.push('/carteira');
   };
@@ -66,9 +65,7 @@ class Login extends React.Component {
             onClick={ this.handleClick }
           >
             Entrar
-
           </button>
-
         </form>
       </section>
     );
