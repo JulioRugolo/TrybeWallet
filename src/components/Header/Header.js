@@ -13,10 +13,12 @@ class Header extends Component {
           { ' ' }
           {email}
         </p>
-        <p data-testid="total-field">
+        <p>
           Despesa Total:
           { ' ' }
-          {total}
+          <span data-testid="total-field">
+            { total }
+          </span>
         </p>
         <p data-testid="header-currency-field">
           {globalCurrency}
@@ -28,13 +30,19 @@ class Header extends Component {
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  total: PropTypes.string.isRequired,
-  globalCurrency: PropTypes.string.isRequired,
+  total: PropTypes.string,
+  globalCurrency: PropTypes.string,
+};
+
+Header.defaultProps = {
+  globalCurrency: 'BRL',
+  total: 0,
 };
 
 const mapStateToProps = (state) => (
   {
     email: state.user.email,
+    total: state.wallet.total,
   }
 );
 
