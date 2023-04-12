@@ -68,4 +68,9 @@ const mapStateToProps = (state) => (
   }
 );
 
+Table.propTypes = {
+  expenses: PropTypes.string.isRequired,
+  exchangeRates: PropTypes.string.isRequired,
+};
+
 export default connect(mapStateToProps)(Table);
