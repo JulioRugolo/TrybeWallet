@@ -29,7 +29,7 @@ const wallet = (state = INITIAL_STATE, action) => {
   case REMOVE_ITEM: {
     return ({
       ...state,
-      expenses: [...state.expenses.filter((item) => item.id !== action.payload.id)],
+      expenses: [...state.expenses.filter((item) => item.id !== action.payload)],
     });
   }
 

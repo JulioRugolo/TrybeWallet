@@ -35,7 +35,7 @@ export const totalSum = (value) => (
   }
 );
 
-export const removeExpense = (item) => ({
+export const removeExpense = (id) => ({
   type: REMOVE_ITEM,
-  payload: item,
+  payload: id,
 });
