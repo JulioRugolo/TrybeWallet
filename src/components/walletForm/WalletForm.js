@@ -27,7 +27,14 @@ class WalletForm extends Component {
     this.setState({ currenciesAbr: removeUSDT });
   }
 
-  handleChange = ({ target }) => {
+  componentDidUpdate(prevProps) {
+    const { expenses } = this.props;
+    if (prevProps.expenses !== expenses) {
+      this.updateTotal();
+    }
+  }
+
+  handleSelect = ({ target }) => {
     this.setState((prevState) => (
       {
         expense: {
@@ -37,7 +44,7 @@ class WalletForm extends Component {
       }));
   };
 
-  handleSelect = ({ target }) => {
+  handleChange = ({ target }) => {
     this.setState((prevState) => (
       {
         expense: {

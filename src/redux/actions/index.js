@@ -4,6 +4,7 @@ export const SAVE_EMAIL = 'SAVE_EMAIL';
 export const SAVE_CURRENCIES = 'SAVE_CURRENCIES';
 export const SAVE_EXPENSES = 'SAVE_EXPENSES';
 export const UPDATE_TOTAL = 'UPDATE_TOTAL';
+export const REMOVE_ITEM = 'REMOVE_ITEM';
 
 export const saveEmail = (email) => ({ type: SAVE_EMAIL, payload: email });
 
@@ -33,3 +34,8 @@ export const totalSum = (value) => (
     payload: value,
   }
 );
+
+export const removeExpense = (item) => ({
+  type: REMOVE_ITEM,
+  payload: item,
+});

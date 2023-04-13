@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './style.css';
+import { removeExpense } from '../../redux/actions';
 
 const FIXED_NUMBER = 2;
 
@@ -17,12 +18,11 @@ class Table extends Component {
       }
       return exchangeCoin;
     });
-    console.log(resultObject);
     return resultObject;
   };
 
   render() {
-    const { expenses } = this.props;
+    const { expenses, dispatch } = this.props;
     return (
       <table>
         <thead>
@@ -60,8 +60,21 @@ class Table extends Component {
               </td>
               <td>Real</td>
               <td>
-                <button>Editar</button>
-                <button>Excluir</button>
+                <button
+                  type="button"
+                  data-testid="edit-btn"
+                  // onClick={ () => { dispatch(editExpenseWallet(expense)); } }
+                >
+                  Editar despesa
+                </button>
+                <button
+                  type="button"
+                  data-testid="delete-btn"
+                  onClick={ () => dispatch(removeExpense(item)) }
+                >
+                  Excluir
+
+                </button>
               </td>
 
             </tr>
@@ -80,6 +93,7 @@ const mapStateToProps = (state) => (
 );
 
 Table.propTypes = {
+  dispatch: PropTypes.string.isRequired,
   expenses: PropTypes.string.isRequired,
   exchangeRates: PropTypes.string.isRequired,
 };

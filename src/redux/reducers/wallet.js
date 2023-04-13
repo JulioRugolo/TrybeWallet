@@ -1,4 +1,4 @@
-import { SAVE_CURRENCIES, SAVE_EXPENSES, UPDATE_TOTAL } from '../actions';
+import { REMOVE_ITEM, SAVE_CURRENCIES, SAVE_EXPENSES, UPDATE_TOTAL } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -24,11 +24,15 @@ const wallet = (state = INITIAL_STATE, action) => {
     return ({
       ...state,
       expenses: [...state.expenses, { ...action.payload, exchangeRates: action.rates }],
-      // expenses: [...state.expenses, {
-      //   ...action.payload,
-      //   exchangeRates: action.rates,
-      // }],
     });
+
+  case REMOVE_ITEM: {
+    return ({
+      ...state,
+      expenses: [...state.expenses.filter((item) => item.id !== action.payload.id)],
+    });
+  }
+
   default:
     return state;
   }
