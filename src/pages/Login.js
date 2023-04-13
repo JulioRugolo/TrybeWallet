@@ -14,10 +14,8 @@ class Login extends React.Component {
   };
 
   handleEmail = ({ target }) => {
-    if (target.type === 'email') {
-      const testEmail = /\S+@\S+\.\S+/.test(target.value);
-      this.setState({ email: target.value, isEmailValid: testEmail });
-    }
+    const testEmail = /\S+@\S+\.\S+/.test(target.value);
+    this.setState({ email: target.value, isEmailValid: testEmail });
   };
 
   handlePassword = ({ target }) => {
@@ -41,24 +39,28 @@ class Login extends React.Component {
     return (
       <section className="loginPage">
         <form>
-          <input
-            type="email"
-            name="email"
-            onChange={ this.handleEmail }
-            value={ email }
-            data-testid="email-input"
-            placeholder="Digite seu email"
-          />
-
-          <input
-            type="password"
-            name="password"
-            onChange={ this.handlePassword }
-            value={ password }
-            data-testid="password-input"
-            minLength="6"
-            placeholder="Digite sua senha"
-          />
+          <label htmlFor="email">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              onChange={ this.handleEmail }
+              value={ email }
+              data-testid="email-input"
+              placeholder="Digite seu email"
+            />
+          </label>
+          <label htmlFor="password">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              onChange={ this.handlePassword }
+              value={ password }
+              data-testid="password-input"
+              placeholder="Digite sua senha"
+            />
+          </label>
 
           <button
             disabled={ disabledButton }
