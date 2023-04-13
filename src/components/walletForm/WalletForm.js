@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import getCurrencies from '../../services/getCurrencies';
-import { saveCurrencies, fetchRates, totalSum } from '../../redux/actions';
-
-const timeOut = 8;
+import { saveCurrencies, fetchRates } from '../../redux/actions';
 
 class WalletForm extends Component {
   state = {
@@ -27,13 +25,6 @@ class WalletForm extends Component {
     this.setState({ currenciesAbr: removeUSDT });
   }
 
-  componentDidUpdate(prevProps) {
-    const { expenses } = this.props;
-    if (prevProps.expenses !== expenses) {
-      this.updateTotal();
-    }
-  }
-
   handleSelect = ({ target }) => {
     this.setState((prevState) => (
       {
@@ -52,16 +43,6 @@ class WalletForm extends Component {
           [target.name]: target.value,
         },
       }));
-  };
-
-  updateTotal = () => {
-    const { expenses, dispatch } = this.props;
-    const resultSum = expenses.reduce((acc, curr, index) => acc + (expenses[index].value
-      * Object.values(expenses[index].exchangeRates)
-        .find((info) => expenses[index].currency === info.code).ask), 0)
-      .toFixed(2);
-
-    dispatch(totalSum(resultSum));
   };
 
   handleClick = (event) => {
@@ -88,10 +69,6 @@ class WalletForm extends Component {
         method: 'Dinheiro',
         tag: 'Alimentação',
       },
-    }, () => {
-      setTimeout(() => {
-        this.updateTotal();
-      }, timeOut);
     });
   };
 
@@ -181,8 +158,6 @@ const mapStateToProps = (state) => (
 
 WalletForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  expenses: PropTypes.string.isRequired,
-  exchangeRates: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(WalletForm);

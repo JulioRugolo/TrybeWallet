@@ -21,8 +21,14 @@ class Table extends Component {
     return resultObject;
   };
 
+  removeExpense = (id) => {
+    const { dispatch, expenses } = this.props;
+    const removedExpense = expenses.filter((item) => item.id !== id);
+    dispatch(removeExpense(removedExpense));
+  };
+
   render() {
-    const { expenses, dispatch } = this.props;
+    const { expenses } = this.props;
     return (
       <table>
         <thead>
@@ -39,7 +45,7 @@ class Table extends Component {
           </tr>
         </thead>
         <tbody>
-          {expenses.map((item, index) => (
+          {expenses && expenses.map((item, index) => (
             <tr key={ index }>
               <td>{item.description}</td>
               <td>{item.tag}</td>
@@ -62,15 +68,8 @@ class Table extends Component {
               <td>
                 <button
                   type="button"
-                  data-testid="edit-btn"
-                  // onClick={ () => { dispatch(editExpenseWallet(expense)); } }
-                >
-                  Editar despesa
-                </button>
-                <button
-                  type="button"
                   data-testid="delete-btn"
-                  onClick={ () => dispatch(removeExpense(item.id)) }
+                  onClick={ () => this.removeExpense(item.id) }
                 >
                   Excluir
 
@@ -93,9 +92,16 @@ const mapStateToProps = (state) => (
 );
 
 Table.propTypes = {
-  dispatch: PropTypes.string.isRequired,
-  expenses: PropTypes.string.isRequired,
-  exchangeRates: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.shape({
+    currency: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    exchangeRates: PropTypes.shape({
+      USD: PropTypes.shape({
+        code: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
+  })).isRequired,
 };
 
 export default connect(mapStateToProps)(Table);

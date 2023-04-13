@@ -5,7 +5,7 @@ import './Style.css';
 
 class Header extends Component {
   render() {
-    const { email, total = 0, globalCurrency = 'BRL' } = this.props;
+    const { email, expenses } = this.props;
     return (
       <header>
         <p data-testid="email-field">
@@ -17,11 +17,16 @@ class Header extends Component {
           Despesa Total:
           { ' ' }
           <span data-testid="total-field">
-            { total }
+            {
+              expenses.reduce((acc, curr, index) => acc + (expenses[index].value
+                * Object.values(expenses[index].exchangeRates)
+                  .find((info) => expenses[index].currency === info.code).ask), 0)
+                .toFixed(2)
+            }
           </span>
         </p>
         <p data-testid="header-currency-field">
-          {globalCurrency}
+          BRL
         </p>
       </header>
     );
@@ -30,19 +35,22 @@ class Header extends Component {
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  total: PropTypes.string,
-  globalCurrency: PropTypes.string,
-};
-
-Header.defaultProps = {
-  globalCurrency: 'BRL',
-  total: 0,
+  expenses: PropTypes.arrayOf(PropTypes.shape({
+    currency: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    exchangeRates: PropTypes.shape({
+      USD: PropTypes.shape({
+        code: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
+  })).isRequired,
 };
 
 const mapStateToProps = (state) => (
   {
     email: state.user.email,
     total: state.wallet.total,
+    expenses: state.wallet.expenses,
   }
 );
 
