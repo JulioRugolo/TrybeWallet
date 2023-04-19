@@ -1,0 +1,46 @@
+.loginPage {
+  align-items: center;
+  background-color: rgb(24, 119, 227);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100vh;
+  justify-content: center;
+}
+
+.formLogin {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  width: 30%;
+}
+
+.input {
+  align-items: center;
+  border-radius: 2px;
+  display: flex;
+  height: 25px;
+  justify-content: center;
+  text-align: center;
+  width: 300px;
+}
+
+.input:focus {
+  border: rgb(10, 18, 243) 3px solid;
+  border-radius: 2px;
+}
+
+form button {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  height: 30px;
+  width: 155px;
+}
+
+form button:disabled {
+  opacity: 0.5;
+}

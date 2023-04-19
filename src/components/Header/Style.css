@@ -1,7 +1,12 @@
 header {
   align-items: center;
   background-color: black;
+  box-shadow: brown 2px 2px 2px;
   color: white;
   display: flex;
+  height: 80px;
   justify-content: space-evenly;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }

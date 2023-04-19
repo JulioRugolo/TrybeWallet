@@ -1,0 +1,11 @@
+.walletForm {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  gap: 10px;
+  height: 80px;
+  justify-content: center;
+  position: absolute;
+  top: 80px;
+  width: 100%;
+}
